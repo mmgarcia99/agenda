@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
-INSTALLED_APPS += ['home',]
+INSTALLED_APPS += ['home', 'produto',]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
