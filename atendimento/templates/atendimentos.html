@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<section class="section has-backgroud-link-light">
+    <div class="container">
+        <form action="" method="GET">
+            <div class="field is-grouped is-flex is-align-items-center is-flex-wrap-wrap">
+                <label class="label p-2 mt-2">{{ form.cliente.label }} </label>
+                <div class="control is-expanded">
+                   {{ form.cliente }}
+                </div>
+
+                <label class="label p-2 mt-2">{{ form.funcionario.label }} </label>
+                <div class="control is-expanded">
+                   {{ form.funcionario }}
+                </div>
+                <label class="label p-2 mt-2">{{ form.servico.label }} </label>
+                <div class="control is-expanded">
+                   {{ form.servico }}
+                </div>
+                <label class="label p-2 mt-2">{{ form.situacao.label }} </label>
+                <div class="control is-expanded">
+                   {{ form.situacao }}
+                </div>
+                <div class="control">
+                    <button type="submit" class="button is-link">
+                        Buscar
+                    </button>
+                </div>
+            </div>
+        </form>
+        {% if object_list %}
+        <div style="text-align: center"><h1 class="subtitle is-size-4">Agendamentos Cadastrados</h1></div>
+        <div class="table">
+            <table class="table is-table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                <tr>
+                    <th class="has-text-center">Horário</th>
+                    <th class="has-text-center">Cliente</th>
+                    <th class="has-text-center">Funcionário</th>
+                    <th class="has-text-center">Serviço</th>
+                    <th class="has-text-center">Situação</th>
+                </tr>
+
+                <tbody>
+                {% for agendamento in object_list %}
+                 <tr>
+                     <td>{{ agendamento.horario }}</td>
+                     <td>{{ agendamento.cliente }}</td>
+                     <td>{{ agendamento.funcionario }}</td>
+                     <td>{{ agendamento.servico }}</td>
+                     <td>{{ agendamento.get_situacao_display }}</td>
+                 </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+      {% else %}
+          <h2> Não existe clientes cadastrados!</h2>
+      {% endif %}
+    </div>
+    <div class="mt-3" style="text-align: center">
+        <span class="step-links">
+            {% if object_list.has_previous %}
+            <a href="?page={{ object_list.previous_page_number }}">Anterior</a>
+            {% endif %}
+
+            <span class="current">
+                <strong>{{ object_list.number }}</strong> de {{ object_list.paginator.num_pages }}
+            </span>
+
+            {% if object_list.has_next %}
+                 <a href="?page={{ object_list.next_page_number }}">Próxima</a>
+            {% endif %}
+        </span>
+    </div>
+</section>
+{% endblock %}
