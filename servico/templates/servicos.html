@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<section class="section has-backgroud-link-light">
+    <div class="container">
+        <form action="" method="GET">
+            <div class="field is-grouped is-flex is-align-items-center is-flex-wrap-wrap">
+                <label class="label p-2 mt-2">Nome ou descrição do Serviço: </label>
+                <div class="control is-expanded">
+                    <input class="input" type="text" name="buscar" value="{{request.GET.buscar}}"
+                           placeholder="Digite o nome do produto">
+                </div>
+                <div class="control">
+                    <button type="submit" class="button is-link">
+                        Buscar
+                    </button>
+                </div>
+            </div>
+        </form>
+        {% if object_list %}
+        <div style="text-align: center"><h1 class="subtitle is-size-4">Serviços Cadastrados</h1></div>
+        <div class="table">
+            <table class="table is-table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                <tr>
+                    <th class="has-text-center">Nome</th>
+                    <th class="has-text-center">Descrição</th>
+                    <th class="has-text-center">Produtos</th>
+                    <th class="has-text-center">Preço</th>
+                </tr>
+
+                <tbody>
+                {% for servico in object_list %}
+                    <tr>
+                        <td>{{servico.nome}}</td>
+                        <td>{{servico.descricao}}</td>
+                        <td>
+                            {% for produto in servico.produtos %}
+                                {% if forloop.last %}
+                                    {{ produto }}
+                                {% else %}
+                                    {{ produto }},
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                         <td>{{servico.preco}}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+      {% else %}
+          <h2> Não existe serviços cadastrados!</h2>
+      {% endif %}
+    </div>
+    <div class="mt-3" style="text-align: center">
+        <span class="step-links">
+            {% if object_list.has_previous %}
+            <a href="?page={{ object_list.previous_page_number}}">Anterior</a>
+            {% endif %}
+
+            <span class="current">
+                <strong>{{ object_list.number }}</strong> de {{ object_list.paginator.num_pages }}
+            </span>
+
+
+            {% if object_list.has_next %}
+            <a href="?page={{ object_list.next_page_number }}">Próxima</a>
+            {% endif %}
+
+        </span>
+    </div>
+</section>
+{% endblock %}
+
