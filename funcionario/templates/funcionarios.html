@@ -33,6 +33,7 @@
                     <th class="has-text-center">Nome</th>
                     <th class="has-text-center">Fone</th>
                     <th class="has-text-center">Função</th>
+                    <th class="has-text-center" style="width: 100px;">Ações</th>
                 </tr>
 
                 <tbody>
@@ -44,6 +45,19 @@
                     </a></td>
                     <td>{{funcionario.fone}}</td>
                     <td>{{funcionario.funcao}}</td>
+                    <td class="has-text-centered is-flex is-flex-wrap-nowrap is-justify-content-center">
+                        <a href="{% url 'funcionario_editar' funcionario.pk %}">
+                            <span class="icon">
+                                <i class="fas fa-edit"></i>
+                            </span>
+                        </a>
+
+                        <a href="{% url 'funcionario_apagar' funcionario.pk %}">
+                            <span class="icon">
+                                <i class="far fa-trash-alt"></i>
+                            </span>
+                        </a>
+                    </td>
                     <div class="modal" id="modal{{funcionario.id}}">
                         <div class="modal-backgroud"></div>
                         <div class="modal-card">
@@ -55,7 +69,7 @@
                           <section class="modal-card-body is-flex is-justify-content-center">
                             <div class="content">
                               <p class="image is-128x128">
-                                <img src="{{funcionario.foto.url}}" class="img-fluid" alt="">
+                                <img src="{{funcionarios.foto.url}}" class="img-fluid" alt="">
                               </p>
                             </div>
                           </section>
