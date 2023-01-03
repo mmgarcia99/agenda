@@ -33,6 +33,7 @@
                     <th class="has-text-center">Nome</th>
                     <th class="has-text-center">Fone</th>
                     <th class="has-text-center">E-mail</th>
+                    <th class="has-text-center" style="width: 100px;">Ações</th>
                 </tr>
 
                 <tbody>
@@ -44,6 +45,19 @@
                     </a></td>
                     <td>{{cliente.fone}}</td>
                     <td>{{cliente.email}}</td>
+                    <td class="has-text-centered is-flex is-flex-wrap-nowrap is-justify-content-center">
+                        <a href="{% url 'cliente_editar' cliente.pk %}">
+                            <span class="icon">
+                                <i class="fas fa-edit"></i>
+                            </span>
+                        </a>
+
+                        <a href="{% url 'cliente_apagar' cliente.pk %}">
+                            <span class="icon">
+                                <i class="far fa-trash-alt"></i>
+                            </span>
+                        </a>
+                    </td>
                     <div class="modal" id="modal{{cliente.id}}">
                         <div class="modal-backgroud"></div>
                         <div class="modal-card">
@@ -55,7 +69,7 @@
                           <section class="modal-card-body is-flex is-justify-content-center">
                             <div class="content">
                               <p class="image is-128x128">
-                                <img src="{{cliente.foto.url}}" class="img-fluid" alt="">
+                                <img src="{{clientes.foto.url}}" class="img-fluid" alt="">
                               </p>
                             </div>
                           </section>
